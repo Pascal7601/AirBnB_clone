@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 import cmd
 import shlex
-from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
 import sys
-from test_base_model import User
+from test_base_model import User, Note
 class Command(cmd.Cmd):
     prompt = "(hbnb) "
     
