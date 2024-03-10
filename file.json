@@ -1,10 +1,1 @@
-{
-    "BaseModel.fa400271dfe14fd6887014e98eb60a55": {
-        "id": "fa400271dfe14fd6887014e98eb60a55",
-        "created_at": "2024-03-09T20:16:50.291484",
-        "updated_at": "2024-03-09T20:16:50.291492",
-        "name": "My_First_Model",
-        "my_number": 89,
-        "__class__": "BaseModel"
-    }
-}
+{"BaseModel.fa400271dfe14fd6887014e98eb60a55": {"id": "fa400271dfe14fd6887014e98eb60a55", "created_at": "2024-03-09T20:16:50.291484", "updated_at": "2024-03-09T20:16:50.291492", "name": "My_First_Model", "my_number": 89, "__class__": "BaseModel"}, "BaseModel.3f05fbccdd3d44b9b04a352c32bc853a": {"id": "3f05fbccdd3d44b9b04a352c32bc853a", "created_at": "2024-03-10T08:09:00.159624", "updated_at": "2024-03-10T08:09:00.159636", "__class__": "BaseModel"}, "BaseModel.23afcf5c0be04172b0dfda4a2f137e4d": {"id": "23afcf5c0be04172b0dfda4a2f137e4d", "created_at": "2024-03-10T08:24:42.394524", "updated_at": "2024-03-10T08:24:42.394538", "__class__": "BaseModel"}, "User.a8fbdca765eb4124aaa7bdd4a3edb070": {"id": "a8fbdca765eb4124aaa7bdd4a3edb070", "created_at": "2024-03-10T08:56:43.334233", "updated_at": "2024-03-10T08:56:43.334237", "email": "", "password": "", "first_name": "", "last_name": "", "__class__": "BaseModel"}, "User.d4572ae2f47f438a9c676320cf7b1ac8": {"id": "d4572ae2f47f438a9c676320cf7b1ac8", "created_at": "2024-03-10T08:59:06.520168", "updated_at": "2024-03-10T08:59:06.520172", "email": "", "password": "", "first_name": "", "last_name": "", "__class__": "BaseModel"}, "User.6632b0124e9b4d0387a1590349e75e3a": {"id": "6632b0124e9b4d0387a1590349e75e3a", "created_at": "2024-03-10T09:12:53.751436", "updated_at": "2024-03-10T09:12:53.751444", "email": "airbnb@mail.com", "password": "root", "first_name": "Betty", "last_name": "Bar", "__class__": "BaseModel"}, "User.e20ddf2770204b4687732294525ebf7f": {"id": "e20ddf2770204b4687732294525ebf7f", "created_at": "2024-03-10T09:12:53.751808", "updated_at": "2024-03-10T09:12:53.751816", "email": "airbnb2@mail.com", "password": "root", "first_name": "John", "last_name": "", "__class__": "BaseModel"}, "City.4be21788c09d472984df61ad0f30f8f4": {"id": "4be21788c09d472984df61ad0f30f8f4", "created_at": "2024-03-10T10:06:16.645167", "updated_at": "2024-03-10T10:06:16.645172", "state_id": "", "name": "", "__class__": "City"}}

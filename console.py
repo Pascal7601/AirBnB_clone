@@ -4,11 +4,18 @@ import shlex
 import sys
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
+
 class HBNBCommand(cmd.Cmd):
    """Defines the console"""
    prompt = "(hbnb) "
     
-   class_names = ['BaseModel']
+   class_names = ['BaseModel', 'User', 'City', 'Amenity', 'Place', 'Review', 'State']
 
 
    def do_EOF(self, line):
@@ -30,8 +37,8 @@ class HBNBCommand(cmd.Cmd):
       elif command[0] not in self.class_names:
          print("** class doesn't exist **")
       else:
-         new_instance = BaseModel()
-         new_instance.save()
+         new_instance = eval(f"{command[0]}()")
+         storage.save()
          print(new_instance.id)
 
 
