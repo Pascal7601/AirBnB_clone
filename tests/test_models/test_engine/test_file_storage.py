@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-"""Defines unittests for models/engine/file_storage.py.
+"""
+Module: test_file_storage
+
+Defines unit tests for the FileStorage class in models/engine/file_storage.py.
 
 Unittest classes:
-    TestFileStorage_instantiation
-    TestFileStorage_methods
+    TestFileStorageInstantiation
+    TestFileStorageMethods
 """
 import os
 import json
-import models
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
@@ -20,56 +22,66 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-class TestFileStorage_instantiation(unittest.TestCase):
-    """Unittests for testing instantiation of the FileStorage class."""
+class TestFileStorageInstantiation(unittest.TestCase):
+    """Unit tests for testing instantiation of the FileStorage class."""
 
-    def test_FileStorage_instantiation_no_args(self):
+    def test_instantiation_no_args(self):
+        """Test FileStorage instantiation with no arguments."""
         self.assertEqual(type(FileStorage()), FileStorage)
 
-    def test_FileStorage_instantiation_with_arg(self):
+    def test_instantiation_with_arg(self):
+        """Test FileStorage instantiation with an argument (should raise TypeError)."""
         with self.assertRaises(TypeError):
             FileStorage(None)
 
-    def test_FileStorage_file_path_is_private_str(self):
-        self.assertEqual(str, type(FileStorage.FileStorage_file_path))
+    def test_file_path_is_private_str(self):
+        """Test if FileStorage file path is a private string."""
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
 
-    def testFileStorage_objects_is_private_dict(self):
-        self.assertEqual(dict, type(FileStorage.FileStorage_objects))
+    def test_objects_is_private_dict(self):
+        """Test if FileStorage objects attribute is a private dictionary."""
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_storage_initializes(self):
+        """Test if models.storage initializes as an instance of FileStorage."""
         self.assertEqual(type(models.storage), FileStorage)
 
 
-class TestFileStorage_methods(unittest.TestCase):
-    """Unittests for testing methods of the FileStorage class."""
+class TestFileStorageMethods(unittest.TestCase):
+    """Unit tests for testing methods of the FileStorage class."""
 
     @classmethod
-    def setUp(self):
+    def setUpClass(cls):
+        """Set up test environment."""
         try:
             os.rename("file.json", "tmp")
-        except IOError:
+        except FileNotFoundError:
             pass
 
     @classmethod
-    def tearDown(self):
+    def tearDownClass(cls):
+        """Tear down test environment."""
         try:
             os.remove("file.json")
-        except IOError:
+        except FileNotFoundError:
             pass
         try:
             os.rename("tmp", "file.json")
-        except IOError:
+        except FileNotFoundError:
             pass
-        FileStorage.FileStorage_objects = {}
+        FileStorage._FileStorage__objects = {}
 
     def test_all(self):
+        """Test if all method returns a dictionary."""
         self.assertEqual(dict, type(models.storage.all()))
 
     def test_all_with_arg(self):
+        """Test if all method raises TypeError when called with an argument."""
         with self.assertRaises(TypeError):
             models.storage.all(None)
 
     def test_new(self):
+        """Test if new method adds objects to storage."""
         bm = BaseModel()
         us = User()
         st = State()
@@ -100,10 +112,12 @@ class TestFileStorage_methods(unittest.TestCase):
         self.assertIn(rv, models.storage.all().values())
 
     def test_new_with_args(self):
+        """Test if new method raises TypeError when called with arguments."""
         with self.assertRaises(TypeError):
             models.storage.new(BaseModel(), 1)
 
     def test_save(self):
+        """Test if save method saves objects to file."""
         bm = BaseModel()
         us = User()
         st = State()
@@ -131,10 +145,12 @@ class TestFileStorage_methods(unittest.TestCase):
             self.assertIn("Review." + rv.id, save_text)
 
     def test_save_with_arg(self):
+        """Test if save method raises TypeError when called with an argument."""
         with self.assertRaises(TypeError):
             models.storage.save(None)
 
     def test_reload(self):
+        """Test if reload method reloads objects from file."""
         bm = BaseModel()
         us = User()
         st = State()
@@ -151,7 +167,7 @@ class TestFileStorage_methods(unittest.TestCase):
         models.storage.new(rv)
         models.storage.save()
         models.storage.reload()
-        objs = FileStorage.FileStorage_objects
+        objs = FileStorage._FileStorage__objects
         self.assertIn("BaseModel." + bm.id, objs)
         self.assertIn("User." + us.id, objs)
         self.assertIn("State." + st.id, objs)
@@ -161,9 +177,10 @@ class TestFileStorage_methods(unittest.TestCase):
         self.assertIn("Review." + rv.id, objs)
 
     def test_reload_with_arg(self):
+        """Test if reload method raises TypeError when called with an argument."""
         with self.assertRaises(TypeError):
             models.storage.reload(None)
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     unittest.main()
