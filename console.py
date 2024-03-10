@@ -13,7 +13,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
    """Defines the console"""
-   prompt = "(hbnb) "
+   prompt = "(hbnb) " 
     
    class_names = ['BaseModel', 'User', 'City', 'Amenity', 'Place', 'Review', 'State']
 
@@ -22,12 +22,17 @@ class HBNBCommand(cmd.Cmd):
       """handling the end of file"""
       print()
       return True
+
     
     
-   def do_quit(self, line):
+   def do_quit(self, arg):
       """quitting the programme"""
       return True
     
+
+   def emptyline(self):
+      """"returns an empty line"""
+      self.lastcmd = ''
 
    def do_create(self, arg):
       """creates new user for the specific classes"""
@@ -86,11 +91,56 @@ class HBNBCommand(cmd.Cmd):
          for key, value in objects.items():
             print(str(value))
       elif command[0] not in self.class_names:
-         print("** class doesn't exist")
+         print("** class doesn't exist **")
       else:
          for key, value in objects.items():
             if key.split(".")[0] == command[0]:
                print(str(value))
+
+      
+   def default(self, arg):
+      """"handles commands on the command line """
+      arg_list = arg.split(".")
+      new_class_name = arg_list[0]
+      command = arg_list[1].split('(')
+
+      new_method = command[0]
+      extra_arg = command[1].split('(')[0]
+
+      method_dict = {
+         'all' : self.do_all,
+         'show' : self.do_show,
+         'destroy' : self.do_destroy,
+         'update' : self.do_update,
+         'count'  : self.do_count
+
+      }
+      if new_method in method_dict.keys():
+         return method_dict[new_method]("{} {}".format(new_class_name, extra_arg))
+      
+      print("*** Unknown syntax: {}".format(arg))
+      return False
+   
+
+   def do_count(self, arg):
+      """"counts the number of instances"""
+
+      objects = storage.all()
+
+      command = shlex.split(arg)
+      new_class_name = command[0]
+
+      count = 0
+      if command:
+         if new_class_name in self.class_names:
+            for obj in objects.values():
+               if obj.__class__.__name__ == new_class_name:
+                  count += 1
+            print(count)
+         else:
+            print("** invalid class name **")
+      else:
+         print("** class name missing **")
    
 
    def do_update(self, arg):
