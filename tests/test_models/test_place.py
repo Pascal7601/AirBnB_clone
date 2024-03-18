@@ -44,6 +44,12 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """
         Creates a new instance for the specified class.
+
+        Syntax:
+            create <class_name>
+
+        Example:
+            create BaseModel
         """
         # Split the argument into a list of tokens
         command = shlex.split(arg)
@@ -61,6 +67,12 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """
         Shows the string representation of an instance.
+
+        Syntax:
+            show <class_name> <instance_id>
+
+        Example:
+            show BaseModel 1234-5678-9012
         """
         command = shlex.split(arg)
         if len(command) == 0:
@@ -83,6 +95,12 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         """
         Deletes a class or an instance of a class.
+
+        Syntax:
+            destroy <class_name> <instance_id>
+
+        Example:
+            destroy BaseModel 1234-5678-9012
         """
         command = shlex.split(arg)
 
@@ -105,6 +123,13 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """
         Prints the string representation of all instances or specific class.
+
+        Syntax:
+            all [<class_name>]
+
+        Example:
+            all
+            all BaseModel
         """
         objects = storage.all()
         command = shlex.split(arg)
@@ -123,6 +148,11 @@ class HBNBCommand(cmd.Cmd):
     def default(self, arg):
         """
         Handles commands on the command line.
+
+        This method is invoked for any command not recognized by other do_* methods.
+        It tries to interpret the command in the form '<class_name>.<method_name>(<arguments>)'.
+        If the method name is recognized, it delegates the execution to the corresponding method.
+        Otherwise, it prints an error message.
         """
         arg_list = arg.split(".")
         new_class_name = arg_list[0]
@@ -147,6 +177,12 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, arg):
         """
         Counts the number of instances.
+
+        Syntax:
+            count <class_name>
+
+        Example:
+            count BaseModel
         """
         objects = storage.all()
 
@@ -168,6 +204,12 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """
         Updates an instance by adding or updating an attribute.
+
+        Syntax:
+            update <class_name> <instance_id> <attribute_name> <attribute_value>
+
+        Example:
+            update BaseModel 1234-5678-9012 name "New Name"
         """
         command = shlex.split(arg)
         if len(command) == 0:
@@ -205,4 +247,4 @@ class HBNBCommand(cmd.Cmd):
         return cmd.Cmd.onecmd(self, line)
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    HBNBCommand().cmd
