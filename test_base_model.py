@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
 
+<<<<<<< HEAD
 my_model = BaseModel()
 my_model.name = "My First Model"
 my_model.my_number = 89
@@ -20,3 +21,8 @@ print(type(my_new_model.created_at))
 
 print("--")
 print(my_model is my_new_model)
+=======
+class User(BaseModel):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+>>>>>>> 881d6dda88403c4d39b8438c7f8b784c49529a53

@@ -1,6 +1,11 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 
 import json
+=======
+import json
+from models.base_model import BaseModel
+>>>>>>> 881d6dda88403c4d39b8438c7f8b784c49529a53
 
 class FileStorage:
     """serializes instances to JSON file and deserializes JSON file to instances"""
@@ -23,6 +28,7 @@ class FileStorage:
 
     def save(self):
         """serializes objects to JSON file"""
+<<<<<<< HEAD
         serial_obj = {}
         for key, value in self.__objects.items():
             serial_obj[key] = obj.to_dict()
@@ -34,3 +40,13 @@ class FileStorage:
 
 
 
+=======
+
+        with open("self.__file_path", "w") as f:
+            json.dump(self.__objects, f)
+
+    
+    """def reload(self):
+        if self.__file_path:
+            with open(self.__file_path, "r") as f:"""
+>>>>>>> 881d6dda88403c4d39b8438c7f8b784c49529a53

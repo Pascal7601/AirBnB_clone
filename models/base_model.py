@@ -1,11 +1,18 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+from models.engine.file_storage import FileStorage
 
+fileStorage = FileStorage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
         """initializing attributes of BaseModel class"""
+<<<<<<< HEAD
+=======
+        self.__dict__ = kwargs
+        fileStorage.new(self)
+>>>>>>> 881d6dda88403c4d39b8438c7f8b784c49529a53
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -32,7 +39,8 @@ class BaseModel:
 
     def save(self):
         """updates the instance updated_at"""
-        self.updated_at = datetime.now()
+        #self.updated_at = datetime.now()
+        fileStorage.save()
 
 
     def to_dict(self):
@@ -44,3 +52,7 @@ class BaseModel:
         obj_dict['updated_at'] = self.updated_at.isoformat()
 
         return obj_dict
+<<<<<<< HEAD
+=======
+
+>>>>>>> 881d6dda88403c4d39b8438c7f8b784c49529a53
