@@ -1,1 +1,0 @@
-Web static ;an intro to the front end development
